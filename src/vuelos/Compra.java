@@ -5,6 +5,8 @@
  */
 package vuelos;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Jonathan Saez
@@ -12,14 +14,14 @@ package vuelos;
 public class Compra {
     private int id_compra;
     private int id_cliente; // estos tres (cliente, vuelo, asiento no son enteros, revisar despues
-    private int id_vuelo;
     private int id_asiento;
+    private LocalDate fecha;
 
-    public Compra(int id_compra, int id_cliente, int id_vuelo, int id_asiento) {
+    public Compra(int id_compra, int id_cliente, int id_asiento, LocalDate fecha) {
         this.id_compra = id_compra;
         this.id_cliente = id_cliente;
-        this.id_vuelo = id_vuelo;
         this.id_asiento = id_asiento;
+        this.fecha = fecha;
     }
 
     public Compra() {
@@ -41,14 +43,6 @@ public class Compra {
         this.id_cliente = id_cliente;
     }
 
-    public int getId_vuelo() {
-        return id_vuelo;
-    }
-
-    public void setId_vuelo(int id_vuelo) {
-        this.id_vuelo = id_vuelo;
-    }
-
     public int getId_asiento() {
         return id_asiento;
     }
@@ -56,7 +50,14 @@ public class Compra {
     public void setId_asiento(int id_asiento) {
         this.id_asiento = id_asiento;
     }
-    
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
     
     
     

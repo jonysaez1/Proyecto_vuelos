@@ -10,33 +10,42 @@ package vuelos;
  * @author Jonathan Saez
  */
 public class Asiento {
-    private int id_asiento;
-    private String numero;
+    private float precio;
+    private String ubicacion;
+    private boolean disponibilidad;
 
-    public Asiento(int id_asiento, String numero) {
-        this.id_asiento = id_asiento;
-        this.numero = numero;
+    public Asiento(float precio, String ubicacion, boolean disponibilidad) {
+        this.precio = precio;
+        this.ubicacion = ubicacion;
+        this.disponibilidad = disponibilidad;
     }
 
     public Asiento() {
     }
 
-    public int getId_asiento() {
-        return id_asiento;
+    public float getPrecio() {
+        return precio;
     }
 
-    public void setId_asiento(int id_asiento) {
-        this.id_asiento = id_asiento;
+    public void setPrecio(float precio) {
+        this.precio = precio;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
-    
+
+    public boolean isDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
     
     
 }

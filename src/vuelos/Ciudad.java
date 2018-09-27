@@ -10,18 +10,53 @@ package vuelos;
  * @author Jonathan Saez
  */
 public class Ciudad {
-    private String pais;
+    private int id_ciudad;
+    private String origen;
+    private String destino;
+    private int pais;
 
-    public Ciudad(String pais) {
+    public Ciudad(int id_ciudad, String origen, String destino, int pais) {
+        this.id_ciudad = id_ciudad;
+        this.origen = origen;
+        this.destino = destino;
         this.pais = pais;
     }
 
-    public String getPais() {
+    public Ciudad() {
+    }
+
+    public int getId_ciudad() {
+        return id_ciudad;
+    }
+
+    public void setId_ciudad(int id_ciudad) {
+        this.id_ciudad = id_ciudad;
+    }
+
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public int getPais() {
         return pais;
     }
 
-    public void setPais(String pais) {
+    public void setPais(int pais) {
         this.pais = pais;
     }
+    
+    
     
 }

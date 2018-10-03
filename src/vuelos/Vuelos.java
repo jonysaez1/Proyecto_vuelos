@@ -15,14 +15,14 @@ public class Vuelos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        Conexion conexion;  
+        Conexion conectar;
         try {
-            conexion = new Conexion ("jdbc:mysql://localhost/pro_vuelo", "root", "");
+            conectar = new Conexion("jdbc:mysql://localhost/vuelo", "root", "");
+            VueloData vueloData = new VueloData(conectar); 
+        } catch(Exception e) {
             
-        } catch(Exception e){
-            System.out.println("Error al instanciar la clase conexion: " + e.getMessage());
-        }  
+        }
+        
     }
     
 }

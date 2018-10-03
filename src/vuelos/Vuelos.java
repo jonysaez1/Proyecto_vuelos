@@ -7,7 +7,7 @@ package vuelos;
 
 /**
  *
- * @author Jonathan Saez
+ * @author Grupo 28
  */
 public class Vuelos {
 
@@ -15,8 +15,14 @@ public class Vuelos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         
+        Conexion conexion;  
+        try {
+            conexion = new Conexion ("jdbc:mysql://localhost/pro_vuelo", "root", "");
+            
+        } catch(Exception e){
+            System.out.println("Error al instanciar la clase conexion: " + e.getMessage());
+        }  
     }
     
 }

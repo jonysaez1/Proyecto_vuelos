@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 25-09-2018 a las 19:28:14
--- Versión del servidor: 5.7.17-log
--- Versión de PHP: 5.6.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-10-2018 a las 16:06:17
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,190 +25,190 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_aerolineas`
+-- Estructura de tabla para la tabla `asiento`
 --
 
-CREATE TABLE `tbl_aerolineas` (
-  `id_aerolinea` int(11) NOT NULL,
-  `tipo_avion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_aerolineas`
---
-
-INSERT INTO `tbl_aerolineas` (`id_aerolinea`, `tipo_avion`) VALUES
-(1, 'Qantas'),
-(2, 'American Airlines'),
-(3, 'Cape Air'),
-(4, 'United Airlines'),
-(5, 'Metrojet');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_asiento`
---
-
-CREATE TABLE `tbl_asiento` (
+CREATE TABLE `asiento` (
   `id_asiento` int(11) NOT NULL,
-  `numero` char(20) DEFAULT NULL,
-  `disponibilidad` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `precio` float NOT NULL,
+  `ubicacion` char(5) NOT NULL,
+  `disponibilidad` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_clientes`
+-- Estructura de tabla para la tabla `ciudad_destino`
 --
 
-CREATE TABLE `tbl_clientes` (
-  `id_usuarios` int(11) NOT NULL,
-  `n_pasaporte` int(11) DEFAULT NULL,
-  `tarj_cred` char(20) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `ciudad_destino` (
+  `id_ciudad` int(11) NOT NULL,
+  `pais` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_compra`
+-- Estructura de tabla para la tabla `ciudad_origen`
 --
 
-CREATE TABLE `tbl_compra` (
+CREATE TABLE `ciudad_origen` (
+  `id_ciudad_or` int(11) NOT NULL,
+  `pais_or` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `id_cliente` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `n_pasaporte` varchar(25) NOT NULL,
+  `n_tarjeta` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compra`
+--
+
+CREATE TABLE `compra` (
   `id_compra` int(11) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
-  `id_vuelo` int(11) DEFAULT NULL,
-  `id_asiento` int(11) DEFAULT NULL,
-  `precio` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_cliente` int(11) NOT NULL,
+  `id_asiento` int(11) NOT NULL,
+  `fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_pais`
+-- Estructura de tabla para la tabla `vuelo`
 --
 
-CREATE TABLE `tbl_pais` (
-  `id_pais` int(11) NOT NULL,
-  `ciudad_origen` varchar(255) DEFAULT NULL,
-  `ciudad_destino` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_vuelo`
---
-
-CREATE TABLE `tbl_vuelo` (
-  `id_vuelo` int(11) NOT NULL,
-  `id_aerolinea` int(11) DEFAULT NULL,
-  `ciudad_origen` varchar(255) DEFAULT NULL,
-  `ciudad_destino` varchar(255) DEFAULT NULL,
-  `fecha_salida` datetime DEFAULT NULL,
-  `fecha_llegada` datetime DEFAULT NULL,
-  `id_asiento` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `vuelo` (
+  `id` int(11) NOT NULL,
+  `id_asiento` int(11) NOT NULL,
+  `aerolinea` varchar(50) NOT NULL,
+  `aeronave` varchar(50) NOT NULL,
+  `fecha_llegada` datetime NOT NULL,
+  `fecha_partida` datetime NOT NULL,
+  `id_ciudad_destino` int(11) NOT NULL,
+  `id_ciudad_origen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `tbl_aerolineas`
+-- Indices de la tabla `asiento`
 --
-ALTER TABLE `tbl_aerolineas`
-  ADD PRIMARY KEY (`id_aerolinea`);
-
---
--- Indices de la tabla `tbl_asiento`
---
-ALTER TABLE `tbl_asiento`
+ALTER TABLE `asiento`
   ADD PRIMARY KEY (`id_asiento`);
 
 --
--- Indices de la tabla `tbl_clientes`
+-- Indices de la tabla `ciudad_destino`
 --
-ALTER TABLE `tbl_clientes`
-  ADD PRIMARY KEY (`id_usuarios`);
+ALTER TABLE `ciudad_destino`
+  ADD PRIMARY KEY (`id_ciudad`);
 
 --
--- Indices de la tabla `tbl_compra`
+-- Indices de la tabla `ciudad_origen`
 --
-ALTER TABLE `tbl_compra`
+ALTER TABLE `ciudad_origen`
+  ADD PRIMARY KEY (`id_ciudad_or`);
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`id_cliente`);
+
+--
+-- Indices de la tabla `compra`
+--
+ALTER TABLE `compra`
   ADD PRIMARY KEY (`id_compra`),
-  ADD KEY `FK_tbl_compra_tbl_vuelo_id_aerolinea` (`id_vuelo`),
-  ADD KEY `FK_tbl_compra_tbl_asiento_id_asiento` (`id_asiento`),
-  ADD KEY `FK_tbl_compra_tbl_clientes_id_usuarios` (`id_cliente`);
+  ADD UNIQUE KEY `id_cliente` (`id_cliente`),
+  ADD UNIQUE KEY `id_asiento` (`id_asiento`);
 
 --
--- Indices de la tabla `tbl_pais`
+-- Indices de la tabla `vuelo`
 --
-ALTER TABLE `tbl_pais`
-  ADD PRIMARY KEY (`id_pais`);
-
---
--- Indices de la tabla `tbl_vuelo`
---
-ALTER TABLE `tbl_vuelo`
-  ADD PRIMARY KEY (`id_vuelo`),
-  ADD KEY `FK_tbl_vuelo_tbl_aerolineas_id_aerolinea` (`id_aerolinea`),
-  ADD KEY `FK_tbl_vuelo_tbl_compra_id_asiento` (`id_asiento`);
+ALTER TABLE `vuelo`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_asiento` (`id_asiento`),
+  ADD UNIQUE KEY `id_ciudad_destino` (`id_ciudad_destino`),
+  ADD UNIQUE KEY `id_ciudad_origen` (`id_ciudad_origen`),
+  ADD UNIQUE KEY `id_ciudad_origen_2` (`id_ciudad_origen`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `tbl_aerolineas`
+-- AUTO_INCREMENT de la tabla `asiento`
 --
-ALTER TABLE `tbl_aerolineas`
-  MODIFY `id_aerolinea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de la tabla `tbl_asiento`
---
-ALTER TABLE `tbl_asiento`
+ALTER TABLE `asiento`
   MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `tbl_clientes`
+-- AUTO_INCREMENT de la tabla `ciudad_destino`
 --
-ALTER TABLE `tbl_clientes`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ciudad_destino`
+  MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `tbl_compra`
+-- AUTO_INCREMENT de la tabla `cliente`
 --
-ALTER TABLE `tbl_compra`
+ALTER TABLE `cliente`
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `compra`
+--
+ALTER TABLE `compra`
   MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `tbl_pais`
+-- AUTO_INCREMENT de la tabla `vuelo`
 --
-ALTER TABLE `tbl_pais`
-  MODIFY `id_pais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT de la tabla `tbl_vuelo`
---
-ALTER TABLE `tbl_vuelo`
-  MODIFY `id_vuelo` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `vuelo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `tbl_compra`
+-- Filtros para la tabla `asiento`
 --
-ALTER TABLE `tbl_compra`
-  ADD CONSTRAINT `FK_tbl_compra_tbl_clientes_id_usuarios` FOREIGN KEY (`id_cliente`) REFERENCES `tbl_clientes` (`id_usuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_tbl_compra_tbl_vuelo_id_aerolinea` FOREIGN KEY (`id_vuelo`) REFERENCES `tbl_vuelo` (`id_aerolinea`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `asiento`
+  ADD CONSTRAINT `asiento_ibfk_1` FOREIGN KEY (`id_asiento`) REFERENCES `vuelo` (`id_asiento`);
 
 --
--- Filtros para la tabla `tbl_vuelo`
+-- Filtros para la tabla `ciudad_destino`
 --
-ALTER TABLE `tbl_vuelo`
-  ADD CONSTRAINT `FK_tbl_vuelo_tbl_aerolineas_id_aerolinea` FOREIGN KEY (`id_aerolinea`) REFERENCES `tbl_aerolineas` (`id_aerolinea`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_tbl_vuelo_tbl_asiento_id_asiento` FOREIGN KEY (`id_asiento`) REFERENCES `tbl_asiento` (`id_asiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_tbl_vuelo_tbl_compra_id_asiento` FOREIGN KEY (`id_asiento`) REFERENCES `tbl_compra` (`id_asiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `ciudad_destino`
+  ADD CONSTRAINT `ciudad_destino_ibfk_1` FOREIGN KEY (`id_ciudad`) REFERENCES `vuelo` (`id_ciudad_destino`);
+
+--
+-- Filtros para la tabla `compra`
+--
+ALTER TABLE `compra`
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_asiento`) REFERENCES `asiento` (`id_asiento`),
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`);
+
+--
+-- Filtros para la tabla `vuelo`
+--
+ALTER TABLE `vuelo`
+  ADD CONSTRAINT `vuelo_ibfk_1` FOREIGN KEY (`id_ciudad_origen`) REFERENCES `ciudad_origen` (`id_ciudad_or`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

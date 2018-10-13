@@ -15,10 +15,11 @@ public class Vuelos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Conexion conectar;
+        Conexion con;
         try {
-            conectar = new Conexion("jdbc:mysql://localhost/vuelo", "root", "");
-            VueloData vueloData = new VueloData(conectar); 
+            con = new Conexion("jdbc:mysql://localhost/vuelo", "root", "");
+            ClienteData clienteData = new ClienteData(con);
+            clienteData.guardarCliente(new Cliente(-1, "Gerardo", "12345", "013423495"));
         } catch(Exception e) {
             
         }

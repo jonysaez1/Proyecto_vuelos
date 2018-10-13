@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vuelos;
 
 import java.sql.Connection;
@@ -31,11 +27,11 @@ public class Ciudad_Data {
     public void guardarCiudad(Ciudad ciudad){
         try {
             
-            String sql = "INSERT INTO ciudad (id_ciudad, nombre, pais) VALUES ( ? , ? , ? );";
+            String sql = "INSERT INTO ciudad (ciudad_origen,ciudad_destino, pais) VALUES (? , ? , ? );";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, ciudad.getId_ciudad());
-            statement.setString(2, ciudad.getNombre_ciudad() );
+            statement.setString(1, ciudad.getCiudad_origen());
+            statement.setString(2, ciudad.getCiudad_destino());
             statement.setInt(3, ciudad.getPais());
             
             statement.executeUpdate();
@@ -64,7 +60,8 @@ public class Ciudad_Data {
         while(resultSet.next()){
             ciudad = new Ciudad();
             ciudad.setId_ciudad(resultSet.getInt("id_ciudad"));
-            ciudad.setNombre_cidad(resultSet.getString("nombre_ciudad"));
+            ciudad.setCiudad_origen(resultSet.getString("ciudad_origen"));
+            ciudad.setCiudad_destino(resultSet.getString("ciudad_destino"));
             ciudad.setPais(resultSet.getInt("pais"));
             ciudades.add(ciudad);
         }      
@@ -88,10 +85,10 @@ public class Ciudad_Data {
     
     public void actualizarCiudad_destino(Ciudad ciudad){
        try {
-            String sql = "UPDATE ciudad SET pais = ?, nombre_ciudad =? WHERE id_ciudad = ?;";
+            String sql = "UPDATE ciudad SET pais = ?, ciudad_destino =? WHERE id_ciudad = ?;";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, ciudad.getPais());
-            statement.setString(2, ciudad.getNombre_ciudad());
+            statement.setString(2, ciudad.getCiudad_destino());
             statement.setInt(3, ciudad.getId_ciudad());
             statement.executeUpdate();
             statement.close();
@@ -103,7 +100,7 @@ public class Ciudad_Data {
     public Ciudad buscarCiudad_destino(int id_ciudad){
     Ciudad ciudad=null;
     try {
-        String sql = "SELECT * FROM ciudad WHERE id_ciudad =?;";
+        String sql = "SELECT * FROM ciudad WHERE ciudad_destino =?;";
         PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, id_ciudad);
            
@@ -112,7 +109,7 @@ public class Ciudad_Data {
         {
             ciudad = new Ciudad();
             ciudad.setId_ciudad(resultSet.getInt("id_ciudad"));
-            ciudad.setNombre_cidad(resultSet.getString("nombre_ciudad"));
+            ciudad.setCiudad_destino(resultSet.getString("ciudad_destino"));
             ciudad.setPais(resultSet.getInt("pais"));
         }      
         statement.close();

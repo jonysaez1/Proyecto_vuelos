@@ -22,6 +22,9 @@ public class VueloData {
             System.out.println("Error al abrir al obtener la conexion");
         }
     }
+    public void guardarVuelo(Vuelo vuelo){
+        
+    }
     
     
 }

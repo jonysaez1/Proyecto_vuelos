@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2018 a las 16:06:17
+-- Tiempo de generación: 12-10-2018 a las 14:22:53
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `asiento` (
   `id_asiento` int(11) NOT NULL,
+  `id_vuelo` int(11) NOT NULL,
   `precio` float NOT NULL,
   `ubicacion` char(5) NOT NULL,
   `disponibilidad` tinyint(1) NOT NULL
@@ -38,23 +39,14 @@ CREATE TABLE `asiento` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ciudad_destino`
+-- Estructura de tabla para la tabla `ciudad`
 --
 
-CREATE TABLE `ciudad_destino` (
-  `id_ciudad` int(11) NOT NULL,
+CREATE TABLE `ciudad` (
+  `id` int(11) NOT NULL,
+  `ciudad_origen` varchar(50) NOT NULL,
+  `ciudad_destino` varchar(50) NOT NULL,
   `pais` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ciudad_origen`
---
-
-CREATE TABLE `ciudad_origen` (
-  `id_ciudad_or` int(11) NOT NULL,
-  `pais_or` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -91,13 +83,12 @@ CREATE TABLE `compra` (
 
 CREATE TABLE `vuelo` (
   `id` int(11) NOT NULL,
-  `id_asiento` int(11) NOT NULL,
   `aerolinea` varchar(50) NOT NULL,
   `aeronave` varchar(50) NOT NULL,
   `fecha_llegada` datetime NOT NULL,
   `fecha_partida` datetime NOT NULL,
-  `id_ciudad_destino` int(11) NOT NULL,
-  `id_ciudad_origen` int(11) NOT NULL
+  `id_ciudad` int(11) NOT NULL,
+  `id_ciudad_destino` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -108,19 +99,14 @@ CREATE TABLE `vuelo` (
 -- Indices de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  ADD PRIMARY KEY (`id_asiento`);
+  ADD PRIMARY KEY (`id_asiento`),
+  ADD UNIQUE KEY `id_vuelo` (`id_vuelo`);
 
 --
--- Indices de la tabla `ciudad_destino`
+-- Indices de la tabla `ciudad`
 --
-ALTER TABLE `ciudad_destino`
-  ADD PRIMARY KEY (`id_ciudad`);
-
---
--- Indices de la tabla `ciudad_origen`
---
-ALTER TABLE `ciudad_origen`
-  ADD PRIMARY KEY (`id_ciudad_or`);
+ALTER TABLE `ciudad`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `cliente`
@@ -141,10 +127,8 @@ ALTER TABLE `compra`
 --
 ALTER TABLE `vuelo`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_asiento` (`id_asiento`),
-  ADD UNIQUE KEY `id_ciudad_destino` (`id_ciudad_destino`),
-  ADD UNIQUE KEY `id_ciudad_origen` (`id_ciudad_origen`),
-  ADD UNIQUE KEY `id_ciudad_origen_2` (`id_ciudad_origen`);
+  ADD UNIQUE KEY `id_ciudad_destino` (`id_ciudad`),
+  ADD UNIQUE KEY `id_ciudad_destino_2` (`id_ciudad_destino`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -155,12 +139,6 @@ ALTER TABLE `vuelo`
 --
 ALTER TABLE `asiento`
   MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `ciudad_destino`
---
-ALTER TABLE `ciudad_destino`
-  MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -188,13 +166,13 @@ ALTER TABLE `vuelo`
 -- Filtros para la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  ADD CONSTRAINT `asiento_ibfk_1` FOREIGN KEY (`id_asiento`) REFERENCES `vuelo` (`id_asiento`);
+  ADD CONSTRAINT `asiento_ibfk_1` FOREIGN KEY (`id_vuelo`) REFERENCES `vuelo` (`id`);
 
 --
--- Filtros para la tabla `ciudad_destino`
+-- Filtros para la tabla `ciudad`
 --
-ALTER TABLE `ciudad_destino`
-  ADD CONSTRAINT `ciudad_destino_ibfk_1` FOREIGN KEY (`id_ciudad`) REFERENCES `vuelo` (`id_ciudad_destino`);
+ALTER TABLE `ciudad`
+  ADD CONSTRAINT `ciudad_ibfk_1` FOREIGN KEY (`id`) REFERENCES `vuelo` (`id_ciudad_destino`);
 
 --
 -- Filtros para la tabla `compra`
@@ -207,7 +185,7 @@ ALTER TABLE `compra`
 -- Filtros para la tabla `vuelo`
 --
 ALTER TABLE `vuelo`
-  ADD CONSTRAINT `vuelo_ibfk_1` FOREIGN KEY (`id_ciudad_origen`) REFERENCES `ciudad_origen` (`id_ciudad_or`);
+  ADD CONSTRAINT `vuelo_ibfk_1` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudad` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

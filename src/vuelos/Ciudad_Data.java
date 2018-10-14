@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Jonathan Saez
+ * @author grupo 28
  */
 public class Ciudad_Data {
     private Connection connection = null;

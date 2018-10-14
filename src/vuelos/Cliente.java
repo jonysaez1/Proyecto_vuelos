@@ -7,7 +7,7 @@ package vuelos;
 
 /**
  *
- * @author gerar
+ * @author grupo 28
  */
 public class Cliente {
     private int id;

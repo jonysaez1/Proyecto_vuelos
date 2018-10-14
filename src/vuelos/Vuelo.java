@@ -1,38 +1,37 @@
 
 package vuelos;
 
+import java.time.LocalDate;
+
 public class Vuelo {
     private int id=-1;
     private String aerolinea;
     private String aeronave;
-    private String fecha_llegada;
-    private String fecha_partida;
-    private Ciudad id_ciudad_destino;
+    private LocalDate fecha_llegada;
+    private LocalDate fecha_partida;
+    private Ciudad id_ciudad;
     private Ciudad id_ciudad_origen;
 
-    public Vuelo(int id, String aerolinea, String aeronave, String fecha_llegada, String fecha_partida, Ciudad id_ciudad_destino, Ciudad id_ciudad_origen) {
+    public Vuelo(int id, String aerolinea, String aeronave, LocalDate fecha_llegada, LocalDate fecha_partida, Ciudad id_ciudad, Ciudad id_ciudad_origen) {
         this.id = id;
         this.aerolinea = aerolinea;
         this.aeronave = aeronave;
         this.fecha_llegada = fecha_llegada;
         this.fecha_partida = fecha_partida;
-        this.id_ciudad_destino = id_ciudad_destino;
+        this.id_ciudad = id_ciudad;
         this.id_ciudad_origen = id_ciudad_origen;
     }
 
-    public Vuelo(String aerolinea, String aeronave, String fecha_llegada, String fecha_partida, Ciudad id_ciudad_destino, Ciudad id_ciudad_origen) {
+    public Vuelo(String aerolinea, String aeronave, LocalDate fecha_llegada, LocalDate fecha_partida, Ciudad id_ciudad, Ciudad id_ciudad_origen) {
         this.aerolinea = aerolinea;
         this.aeronave = aeronave;
         this.fecha_llegada = fecha_llegada;
         this.fecha_partida = fecha_partida;
-        this.id_ciudad_destino = id_ciudad_destino;
+        this.id_ciudad = id_ciudad;
         this.id_ciudad_origen = id_ciudad_origen;
     }
 
-    
-
     public Vuelo() {
-        this.id =-1;
     }
 
     public int getId() {
@@ -59,28 +58,28 @@ public class Vuelo {
         this.aeronave = aeronave;
     }
 
-    public String getFecha_llegada() {
+    public LocalDate getFecha_llegada() {
         return fecha_llegada;
     }
 
-    public void setFecha_llegada(String fecha_llegada) {
+    public void setFecha_llegada(LocalDate fecha_llegada) {
         this.fecha_llegada = fecha_llegada;
     }
 
-    public String getFecha_partida() {
+    public LocalDate getFecha_partida() {
         return fecha_partida;
     }
 
-    public void setFecha_partida(String fecha_partida) {
+    public void setFecha_partida(LocalDate fecha_partida) {
         this.fecha_partida = fecha_partida;
     }
 
-    public Ciudad getId_ciudad_destino() {
-        return id_ciudad_destino;
+    public Ciudad getId_ciudad() {
+        return id_ciudad;
     }
 
-    public void setId_ciudad_destino(Ciudad id_ciudad_destino) {
-        this.id_ciudad_destino = id_ciudad_destino;
+    public void setId_ciudad(Ciudad id_ciudad) {
+        this.id_ciudad = id_ciudad;
     }
 
     public Ciudad getId_ciudad_origen() {
@@ -90,5 +89,13 @@ public class Vuelo {
     public void setId_ciudad_origen(Ciudad id_ciudad_origen) {
         this.id_ciudad_origen = id_ciudad_origen;
     }
+    
+    
+    
+    
+    
+    
+
+    
     
 }

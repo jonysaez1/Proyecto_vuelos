@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author gerar
+* @author grupo28
  */
 public class ClienteData {
     private Connection connection = null;

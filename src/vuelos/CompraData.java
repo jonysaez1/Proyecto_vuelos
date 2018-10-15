@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Jonathan Saez
+ * @author grupo 28
  */
 public class CompraData {
     private Connection connection = null;
@@ -46,7 +46,7 @@ public class CompraData {
             if (rs.next()) {
                 compra.setId_compra(rs.getInt(1));
             } else {
-                System.out.println("No se pudo obtener el id luego de insertar un alumno");
+                System.out.println("No se pudo obtener el id luego de insertar una compra");
             }
             ps.close();
             
@@ -59,33 +59,7 @@ public class CompraData {
     
         
     }
-    public List<Compra> obtenerCompra(){
-        List<Compra> compras = new ArrayList<Compra>();
-            
-
-        try {
-            String sql = "SELECT * FROM alumno;";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            Compra compra;
-            while(resultSet.next()){
-                compra = new Compra();
-                compra.setId_compra(resultSet.getInt("id_compra"));
-               // Cliente c=buscarCliente(resultSet.getInt("id_cliente"));
-                //Asiento a=buscarAsiento(resultSet.getInt("id_asiento"));
-                compra.setFecha(resultSet.getDate("fecNac").toLocalDate());
-                compra.setPrecio(resultSet.getDouble("precio"));
-
-                compras.add(compra);
-            }      
-            statement.close();
-        } catch (SQLException ex) {
-            System.out.println("Error al obtener los alumnos: " + ex.getMessage());
-        }
-        
-        
-        return compras;
-    }    
+     
     
     public void borrarCompra(int id){
         try {
@@ -144,7 +118,7 @@ public class CompraData {
             statement.close();
     
         } catch (SQLException ex) {
-            System.out.println("Error al insertar un alumno: " + ex.getMessage());
+            System.out.println("Error al insertar una compra: " + ex.getMessage());
         }
         
         return compra;

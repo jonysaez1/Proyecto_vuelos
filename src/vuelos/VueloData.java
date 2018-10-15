@@ -6,6 +6,8 @@
 package vuelos;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -20,6 +22,23 @@ public class VueloData {
             connection = conectar.getConexion();
         } catch (SQLException ex) {
             System.out.println("Error al abrir al obtener la conexion");
+        }
+    }
+    
+    public void guardarVuelo(Vuelo vuelo){
+        try {
+            String url = "INSERT INTO vuelo (aerolinea, aeronave, fecha_llegada, fecha_partida, id_ciudad, id_destino) VALUES (? , ? , ? , ? , ? , ?)";
+            PreparedStatement ps = connection.prepareStatement(url);
+            ps.setString(1, vuelo.getAerolinea());
+            ps.setString(2,vuelo.getAeronave());
+            ps.setDate(3, Date.valueOf(vuelo.getFecha_llegada()));
+            ps.setDate(4, Date.valueOf(vuelo.getFecha_partida()));
+            ps.setInt(5, vuelo.getId_ciudad().getId_ciudad());
+            ps.setInt(6, vuelo.getId_ciudad_origen().getId_ciudad());
+            ps.executeUpdate();
+            
+        } catch(SQLException ex){
+            
         }
     }
  

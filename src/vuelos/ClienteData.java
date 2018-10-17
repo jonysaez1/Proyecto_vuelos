@@ -42,7 +42,7 @@ public class ClienteData {
     
     public void actualizarCliente(Cliente cliente) {
         try {
-            String sql = "UPDATE cliente SET nombre = ? n_pasaporte = ? n_tarjeta = ? WHERE id_cliente = ?";
+            String sql = "UPDATE cliente SET nombre = ?, n_pasaporte = ?, n_tarjeta = ? WHERE id_cliente = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, cliente.getNombre());
             ps.setString(2, cliente.getN_pasaporte());
@@ -67,7 +67,7 @@ public class ClienteData {
     
     public Cliente buscarCliente(String nombre) {
         try {
-            String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+            String sql = "SELECT * FROM cliente WHERE nombre = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, nombre);
             ResultSet r = ps.executeQuery();

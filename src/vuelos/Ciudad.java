@@ -10,23 +10,28 @@ package vuelos;
  * @author grupo 28
  */
 public class Ciudad {
-    private int id_ciudad = -1;
+    private int id ;
     private String ciudad_origen;
     private String ciudad_destino;
     private int pais;
 
-    public Ciudad(int id_ciudad,String ciudad_origen,String ciudad_destino, int pais) {
-        this.id_ciudad = id_ciudad;
+    public Ciudad(int id,String ciudad_origen,String ciudad_destino, int pais) {
+        this.id = id;
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;
         this.pais = pais;
+    }
+    
+    
+    public Ciudad(String ciudad_origen) {
+        this.ciudad_origen = ciudad_origen;
     }
 
     public Ciudad(String ciudad_origen,String ciudad_destino, int pais) {
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;
         this.pais = pais;
-        this.id_ciudad = -1;
+       
         
         
     }
@@ -34,28 +39,28 @@ public class Ciudad {
        
         this.ciudad_destino = ciudad_destino;
         this.pais = pais;
-        this.id_ciudad = -1;
+        this.id = id;
         
         
     }
 
     public Ciudad(int pais) {
         this.pais = pais;
-        this.id_ciudad = -1;
+        this.id = id;
         
         
     }
 
     public Ciudad() {
-        this.id_ciudad= -1;
+        this.id= id;
     }
 
-    public int getId_ciudad() {
-        return id_ciudad;
+    public int getId() {
+        return id;
     }
 
-    public void setId_ciudad(int id_ciudad) {
-        this.id_ciudad = id_ciudad;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCiudad_origen() {
@@ -86,10 +91,10 @@ public class Ciudad {
 
 
     
-    public String toString(){
+   // public String toString(){
     
-        return id_ciudad+"-"+pais;
-    }
+  //      return id+"-"+pais;
+  //  }
     
     
     

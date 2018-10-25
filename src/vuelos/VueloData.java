@@ -33,8 +33,8 @@ public class VueloData {
             ps.setString(2,vuelo.getAeronave());
             ps.setDate(3, Date.valueOf(vuelo.getFecha_llegada()));
             ps.setDate(4, Date.valueOf(vuelo.getFecha_partida()));
-            ps.setInt(5, vuelo.getId_ciudad().getId_ciudad());
-            ps.setInt(6, vuelo.getId_ciudad_origen().getId_ciudad());
+            ps.setInt(5, vuelo.getId_ciudad().getId());
+            ps.setInt(6, vuelo.getId_ciudad_origen().getId());
             ps.executeUpdate();
             
         } catch(SQLException ex){

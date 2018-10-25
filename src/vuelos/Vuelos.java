@@ -20,10 +20,10 @@ public class Vuelos {
             clienteData.guardarCliente(new Cliente(-1, "Fernando", "56345","554566445"));
             
             clienteData.actualizarCliente(new Cliente(2, "Raúl", "123", "0000123"));
-            clienteData.borrarCliente(3);
+            clienteData.eliminarCliente(3);
             
-            Cliente cliente = clienteData.buscarCliente("Gerardo");
-            System.out.println("Usuario: "+cliente.getNombre());
+            //Cliente cliente = clienteData.buscarCliente("");
+            //System.out.println("Usuario: "+cliente.getNombre());
         
         } catch(Exception e) {
             System.out.println("Error al instanciar la clase conexion: " + e.getMessage());

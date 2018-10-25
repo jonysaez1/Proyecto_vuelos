@@ -24,6 +24,7 @@ public class ClienteData {
             connection = conectar.getConexion();
         } catch (SQLException ex) {
             System.out.println("Error al abrir al obtener la conexion");
+            ex.printStackTrace();
         }
     }
     
@@ -34,7 +35,8 @@ public class ClienteData {
             ps.setString(1, cliente.getNombre());
             ps.setString(2, cliente.getN_pasaporte());
             ps.setString(3, cliente.getN_tarjeta());
-            ps.execute();
+            ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,33 +50,40 @@ public class ClienteData {
             ps.setString(2, cliente.getN_pasaporte());
             ps.setString(3, cliente.getN_tarjeta());
             ps.setInt(4, cliente.getId());
-            ps.execute();
+            ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void borrarCliente(int id) {
+    public void eliminarCliente(int id) {
         try {
             String sql = "DELETE FROM cliente WHERE id_cliente = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public Cliente buscarCliente(String nombre) {
+    public Cliente buscarCliente(Cliente cliente) {
         try {
             String sql = "SELECT * FROM cliente WHERE nombre = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, nombre);
+            ps.setString(1, cliente.getNombre());
             ResultSet r = ps.executeQuery();
             
-            if(r.next()) {
-                return new Cliente(r.getInt(1), r.getString(2), r.getString(3), r.getString(4));
+           /*va mientras no if*/
+            while(r.next()) {
+               cliente.setId(r.getInt(1));
+               cliente.setNombre(r.getString(2));
+               cliente.setN_pasaporte(r.getString(3));
+               cliente.setN_tarjeta(r.getString(4));
             }
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
         }
